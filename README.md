@@ -2,6 +2,13 @@
 
 I am building this app to help me learn about creating a full MERN application.
 
+## Useful links:
+https://codingthesmartway.com/the-mern-stack-tutorial-building-a-react-crud-application-from-start-to-finish-part-1/
+https://create-react-app.dev/docs/running-tests/
+https://til.hashrocket.com/posts/dknpxv9kwo-configure-jest-to-run-a-test-setup-file
+https://blog.cloudboost.io/creating-your-first-mern-stack-application-b6604d12e4d3
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
