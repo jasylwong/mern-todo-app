@@ -1,3 +1,7 @@
+# MERN To Do app
+
+I am building this app to help me learn about creating a full MERN application.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
