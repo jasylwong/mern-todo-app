@@ -25,11 +25,15 @@ button.onclick = function() {
 }
 
 moreCards.onclick = function () {
-  numberOfCards++;
-  numberOfCardsDisplay.innerHTML = numberOfCards;
+  if(numberOfCards < 5) {
+    numberOfCards++;
+    numberOfCardsDisplay.innerHTML = numberOfCards;
+  }
 }
 
 fewerCards.onclick = function () {
-  numberOfCards--;
-  numberOfCardsDisplay.innerHTML = numberOfCards;
+  if(numberOfCards > 1) {
+    numberOfCards--;
+    numberOfCardsDisplay.innerHTML = numberOfCards;
+  }
 }
