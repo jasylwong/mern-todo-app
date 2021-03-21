@@ -3,15 +3,15 @@ const app = Vue.createApp({
     return {
       cart: 0,
       product: 'Socks',
+      brand: 'Vue Mastery',
       description: 'To keep your feet warm',
-      image: './assets/images/socks_green.jpeg',
+      selectedVariant: 0,
       url: 'https://www.vuemastery.com/courses/intro-to-vue-3/attribute-binding-vue3',
-      inventory: 1,
       onSale: true,
       details: ['50% cotton', '30% wool', '20% polyester'],
       variants: [
-        { id: 2234, color: 'green', image: './assets/images/socks_green.jpeg' },
-        { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpeg' }
+        { id: 2234, color: 'green', image: './assets/images/socks_green.jpeg', quantity: 5 },
+        { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpeg', quantity: 0 }
       ],
       sizes: ['S', 'M', 'L'],
     }
@@ -23,8 +23,22 @@ const app = Vue.createApp({
     removeFromCart() {
       if (this.cart > 0) this.cart -= 1 
     },
-    updateImage(variantImage) {
-      this.image = variantImage
+    updateVariant(index) {
+      this.selectedVariant = index
+    }
+  },
+  computed: {
+    title() {
+      return `${this.brand} ${this.product}`
+    },
+    saleMessage() {
+      return `${this.title} is on sale`
+    },
+    image() {
+      return this.variants[this.selectedVariant].image
+    },
+    inventory() {
+      return this.variants[this.selectedVariant].quantity
     }
   }
 })
