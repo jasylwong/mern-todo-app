@@ -1,0 +1,86 @@
+app.component('product-display', {
+  props: {
+    premium: {
+      type: Boolean,
+      required: true
+    }
+  },
+  template:
+  /*html*/
+  `<div class="product-display">
+    <div class="product-container">
+      <div class="product-image">
+        <img :src="image" alt="green_socks" :class="[inventory == 0 ? 'out-of-stock-img' : '']">
+        <!-- inStock variant: <img :class="{ 'out-of-stock-img': !inStock }" > -->
+      </div>
+      <div class="product-info">
+        <h1>{{ title }}</h1>
+        <p v-if="onSale">{{ saleMessage }}</p>
+        <p v-if="inventory > 10">In stock</p>
+        <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
+        <p v-else>Out of stock</p>
+        <p>Shipping: {{ shipping }}</p>
+        <p>{{ description }}</p>
+        <a :href="url">Built using Vue Mastery tutorial</a>
+        <product-details :details="details"></product-details>
+        <div
+          v-for="(variant, index) in variants"
+          :key="variant.id"
+          @mouseover="updateVariant(index)"
+          class="color-circle"
+          :style="{ backgroundColor: variant.color }">
+        </div>
+        <ul>
+          <li v-for="(size, index) in sizes" :key="index">{{ size }}</li>
+        </ul>
+        <button class="button" @click="addToCart" :disabled="inventory==0" :class="{ disabledButton: inventory==0 }">Add to Cart</button>
+        <button class="button" @click="removeFromCart">Remove from Cart</button>
+      </div>
+    </div>
+  </div>`,
+
+  data() {
+    return {
+      product: 'Socks',
+      brand: 'Vue Mastery',
+      description: 'To keep your feet warm',
+      selectedVariant: 0,
+      url: 'https://www.vuemastery.com/courses/intro-to-vue-3/attribute-binding-vue3',
+      onSale: true,
+      details: ['50% cotton', '30% wool', '20% polyester'],
+      variants: [
+        { id: 2234, color: 'green', image: './assets/images/socks_green.jpeg', quantity: 5 },
+        { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpeg', quantity: 0 }
+      ],
+      sizes: ['S', 'M', 'L'],
+    }
+  },
+  methods: {
+    addToCart() {
+      this.cart += 1
+    },
+    removeFromCart() {
+      if (this.cart > 0) this.cart -= 1 
+    },
+    updateVariant(index) {
+      this.selectedVariant = index
+    }
+  },
+  computed: {
+    title() {
+      return `${this.brand} ${this.product}`
+    },
+    saleMessage() {
+      return `${this.title} is on sale`
+    },
+    image() {
+      return this.variants[this.selectedVariant].image
+    },
+    inventory() {
+      return this.variants[this.selectedVariant].quantity
+    },
+    shipping() {
+      return this.premium ? 'Free' : 2.99
+    }
+  }
+})
